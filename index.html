@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Professional CV Generator</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-view="edit">
+<div class="app-shell">
+<aside class="editor-panel">
+  <div class="brand"><div class="brand-mark">CV</div><div><h1>CV Generator</h1><p>A4 single-page template</p></div></div>
+  <div class="editor-actions">
+    <button class="btn primary" id="exportBtn">⬇ Save PDF / 🖨 Print</button>
+    <button class="btn" id="clearBtn">Clear</button>
+    <button class="btn" id="restoreBtn" disabled>Restore</button>
+  </div>
+
+  <details>
+    <summary>Personal information</summary>
+    <div class="fields">
+      <label>Profile photo<input id="photoInput" type="file" accept="image/*"></label>
+      <label>Name<input data-p="name"></label>
+      <label>Job title<input data-p="jobTitle"></label>
+      <label>Phone<input data-p="phone" type="tel"></label>
+      <label>Email<input data-p="email" type="email"></label>
+      <label>Location<input data-p="address"></label>
+      <label>Website<input data-p="website"></label>
+      <label>Profile<textarea data-p="profile"></textarea></label>
+    </div>
+  </details>
+
+  <details>
+    <summary>Skills &amp; languages</summary>
+    <div class="fields">
+      <label>Skills
+        <div class="row"><input id="skillIn" placeholder="e.g. Teamwork"><button class="btn small" id="skillAdd" type="button">+ Add</button></div>
+      </label>
+      <div class="chips" id="skillChips"></div>
+      <label>Languages
+        <div class="row">
+          <select id="langSel"></select>
+          <select id="levelSel"><option>Basic</option><option>Intermediate</option><option selected>Fluent</option><option>Native</option></select>
+        </div>
+      </label>
+      <button class="btn small" id="langAdd" type="button">+ Add language</button>
+      <div class="chips" id="langChips"></div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Work experience</summary>
+    <div class="repeatable" id="expEditor"></div>
+    <button class="add-btn" id="addExp" type="button">+ Add experience</button>
+  </details>
+
+  <details>
+    <summary>Education</summary>
+    <div class="repeatable" id="eduEditor"></div>
+    <button class="add-btn" id="addEdu" type="button">+ Add education</button>
+  </details>
+
+  <details>
+    <summary>Reference</summary>
+    <div class="repeatable" id="refEditor"></div>
+    <button class="add-btn" id="addRef" type="button">+ Add reference</button>
+  </details>
+
+  <details>
+    <summary>Personal details</summary>
+    <div class="fields">
+      <label>Father's Name<input data-d="father"></label>
+      <label>Mother's Name<input data-d="mother"></label>
+      <label>Date of Birth<input data-d="dob" placeholder="e.g. 01 January 2000"></label>
+      <label>Religion<input data-d="religion"></label>
+      <label>Marital Status<select data-d="marital"><option value="">Select</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></label>
+      <label>Blood Group<select data-d="blood"><option value="">Select</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+      <label>Permanent Address</label>
+      <label>Village<input data-d="village"></label>
+      <label>Post Office<input data-d="postOffice"></label>
+      <label>Police Station<input data-d="policeStation"></label>
+      <label>District<input data-d="district"></label>
+    </div>
+  </details>
+
+  <p class="editor-note">Changes save automatically in this browser. For PDF: Use <b>Save PDF / Print</b>, choose Color or Black &amp; White, then Save PDF or Print (for Print choose A4 (choose A4, Margins: None, Background graphics on).</p>
+</aside>
+
+<main class="preview-area">
+  <div class="preview-label">LIVE PREVIEW (A4)</div>
+  <div class="warn" id="warn" hidden>⚠ Content does not fit on one A4 page. Shorten some text.</div>
+  <div class="page-box" id="pageBox">
+  <section class="cv-page" id="cvPage">
+    <header class="cv-header">
+      <div class="photo-wrap"><img id="cvPhoto" alt="Profile photo"><div class="photo-placeholder" id="photoPh"></div></div>
+      <div class="header-text"><h2 id="cvName"></h2><p id="cvJob"></p></div>
+    </header>
+    <div class="cv-body">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-content" id="mainContent"></div>
+    </div>
+  </section>
+  </div>
+</main>
+</div>
+<div class="modal" id="exportModal" hidden>
+  <div class="modal-box">
+    <h3>PDF / Print</h3>
+    <p class="modal-sub">কোন ধরনে চান?</p>
+    <label class="opt"><input type="radio" name="cmode" value="color" checked> রঙিন (Color)</label>
+    <label class="opt"><input type="radio" name="cmode" value="bw"> সাদাকালো (Black &amp; White)</label>
+    <div class="modal-actions">
+      <button class="btn primary" id="doPdf" type="button">⬇ Save PDF</button>
+      <button class="btn primary" id="doPrint" type="button">🖨 Print</button>
+      <button class="btn" id="closeModal" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
+<nav class="tabbar">
+  <button id="tabEdit" class="active" type="button">✎ Edit</button>
+  <button id="tabView" type="button">👁 Preview</button>
+</nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
